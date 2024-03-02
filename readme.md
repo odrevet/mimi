@@ -84,3 +84,11 @@ root ALL=(ALL:ALL) ALL
 player ALL=(ALL) ALL
 player ALL=(ALL) NOPASSWD: /sbin/poweroff, /usr/sbin/lighttpd
 ```
+
+
+# Listen music using fuzzy-playlist.sh
+
+
+* Generate music_list.txt using `refresh_musics.list.txt`
+* using `bash readkeys.sh` press `f` or `F1`
+* or using directly `bash fuzzy-playlist.sh FILTER`
