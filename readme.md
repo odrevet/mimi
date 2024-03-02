@@ -71,22 +71,18 @@ Prevent the system to run the rescue shell.
 As the raspberry is shutdown by cutting power using a switch.
 In `/etc/fstab` set last value to 0
 
-# .moc/config
+# Scripts 
 
-```
-SoundDriver = ALSA
-ALSAStutterDefeat = yes
-```
+The repo mimic how file needs to be organized on the host linux system
 
-# /etc/sudoers
 
-Allow the system to be shutdown without a password
+## .moc/config
 
-```
-root ALL=(ALL:ALL) ALL
-player ALL=(ALL) ALL
-player ALL=(ALL) NOPASSWD: /sbin/poweroff, /usr/sbin/lighttpd
-```
+Set driver and prevent stutter
+
+## /etc/sudoers
+
+Allow the system to be shutdown and run the webserver without a password
 
 
 # Listen music using fuzzy-playlist.sh
