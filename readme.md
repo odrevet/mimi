@@ -6,21 +6,24 @@ Mimi has a minimal approach, so minimal that having a screen is optional.
 
 This setup is developed under void linux on a raspberry pi 1B
 
+* Search for music: 
+    - Only using a keyboard using fuzzy search
+    - Connect via ssh 
+    - From a Web API
+
 # Init
 
 * Set shell to bash
 * Install packages
-** alsa-utils: sound driver
-** moc: music player using the console
-** fzf: fuzzy search for musics to play
-** sox: play bip sounds to inform the user when the system is up or when to type
-** mimic: text to speech used to read how musics found and other information's
-** lighttdp: web server to control and get info on playlist
-** jq: used for the API to format response into JSON
+    - alsa-utils: sound driver
+    - moc: music player using the console
+    - fzf: fuzzy search for musics to play
+    - sox: play bip sounds to inform the user when the system is up or when to type
+    - mimic: text to speech used to read how musics found and other information's
+    - lighttdp: web server to control and get info on playlist
+    - jq: used for the API to format response into JSON
 * qemacs: lightweight text editor for maintenance (personal preference)
 * Create a user named `player` to play with unprivileged rights
-
-Install packages and create a user named `player` to run the music player: 
 
 ```
 chsh -s /bin/bash
