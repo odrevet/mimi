@@ -87,7 +87,7 @@ Allow the system to be shutdown and run the webserver without a password
 
 # Listen music using fuzzy-playlist.sh
 
+First generate music_list.txt using `bash refresh_musics.list.sh` then: 
 
-* Generate music_list.txt using `refresh_musics.list.txt`
 * using `bash readkeys.sh` press `f` or `F1`
 * or using directly `bash fuzzy-playlist.sh FILTER`
