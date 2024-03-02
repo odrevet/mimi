@@ -20,16 +20,18 @@ read_key() {
 read_filter() {
   play -n synth 0.1 sine 340
   read -r filter
-  bash fuzzy-playlist.sh $filter $1 $2
+  [[ -n $2 ]] && shuffle="--shuffle" || shuffle=""
+  bash playlist.sh --filter "$filter" --truncat "$1" $shuffle
 }
 
 
 while read_key; do
   case "${key}" in
-    $'f'|$'\eOP'|$'\E[[A') read_filter 96;;         # f or F1
-    $'\006'|$'\eOQ'|$'\E[[B') read_filter 32 1;;    # ctrl-f or F2
+    $'f'|$'\eOP'|$'\E[[A') read_filter 96;;       # f or F1
+    $'\006'|$'\eOQ'|$'\E[[B') read_filter 32 1;;  # ctrl-f or F2
     $'p') mocp --toggle-pause;;
     $'\020') sh poweroff.sh;;  #ctrl-p
+    $'b') bash play-bide.sh;;
     $'r') bash random-playlist.sh;;
     $'\E[A') mocp -r;;      # arrow up
     $'\E[B') mocp -f;;      # arrow down

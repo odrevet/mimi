@@ -1,7 +1,7 @@
 source decode-params.sh
 filter=${params["filter"]}
 
-bash /home/player/fuzzy-playlist.sh $filter 32
+bash /home/player/playlist.sh --filter $filter --truncat 32
 
 echo "Content-type: application/json"
 echo ""
