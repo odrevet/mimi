@@ -1,0 +1,1 @@
+find /mnt -type f \( -name "*.mp3" -o -name "*.flac" -o -name "*.ogg" \) > musics_list.txt

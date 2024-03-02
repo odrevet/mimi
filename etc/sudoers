@@ -1,0 +1,3 @@
+root ALL=(ALL:ALL) ALL
+player ALL=(ALL) ALL
+player ALL=(ALL) NOPASSWD: /sbin/poweroff, /usr/sbin/lighttpd
