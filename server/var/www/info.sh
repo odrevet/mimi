@@ -13,11 +13,6 @@ while IFS= read -r line; do
     info["$key"]="$value"
 done <<< $(mocp -i)
 
-for key in "${!info[@]}"; do
-    echo "Key: $key, Value: ${info[$key]}"
-done
-
-
 echo "Content-type: application/json"
 echo ""
 for i in "${!info[@]}"
