@@ -32,7 +32,6 @@ while read_key; do
     $'p') mocp --toggle-pause;;
     $'\020') sh poweroff.sh;;  #ctrl-p
     $'b') bash play-bide.sh;;
-    $'r') bash random-playlist.sh;;
     $'\E[A') mocp -r;;      # arrow up
     $'\E[B') mocp -f;;      # arrow down
     $'\E[C') mocp -k +10;;  # arrow right
