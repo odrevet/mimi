@@ -35,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Info _info = Info();
+  TextEditingController _filterController = TextEditingController();
 
   void _refreshInfo() async {
     var info = await fetchInfo();
@@ -81,6 +82,26 @@ class _MyHomePageState extends State<MyHomePage> {
               '${_info.state}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TextField(
+                        controller: _filterController,
+                        decoration: InputDecoration(
+                          labelText: 'Enter some text',
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          String inputText = _filterController.text;
+                          play(inputText);
+                        },
+                        child: Text('Play'),
+                      ),
+                    ])),
             ControlBar()
           ],
         ),

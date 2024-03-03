@@ -32,3 +32,15 @@ Future<bool> control(String action) async {
     throw Exception('Failed to send control action');
   }
 }
+
+Future<bool> play(String filter) async {
+  final serverAddress = await _getServerAddress();
+  final response =
+  await http.get(Uri.parse("$serverAddress/play.sh?filter=$filter"));
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    throw Exception('Failed to play');
+  }
+}
