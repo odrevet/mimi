@@ -21,6 +21,9 @@ case "$action" in
   backward)
     mocp -k -10
     ;;
+  poweroff)
+    bash /home/player/poweroff.sh
+    ;;
   *)
     ;;
 esac
