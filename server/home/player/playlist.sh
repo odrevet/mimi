@@ -43,8 +43,11 @@ mocp --stop
 mocp --clear
 
 musics_count=$(echo "$musics" | wc -l)
-mimic "$musics_count musics found"
-
+if [ $musics_count -eq 1 ]; then
+    mimic "1 music found"
+else
+    mimic "$musics_count musics found"
+fi
 
 if [[ "$shuffle" = true ]]; then
     musics=$(echo "$musics" | shuf --random-source=/dev/urandom)
@@ -53,7 +56,7 @@ else
     musics=$(echo "$musics" | sort)
 fi
 
-if [[ "$truncat" = true ]]; then
+if [[ -n "$truncat" ]]; then
     musics=$(echo "$musics" | head -n "$truncat")
 fi
 
