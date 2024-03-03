@@ -1,12 +1,6 @@
 #!/bin/bash
 
-tojson() {
-    declare -n v=$1
-    printf '%s\0' "${!v[@]}" "${v[@]}" |
-    jq -Rs 'split("\u0000") | . as $v | (length / 2) as $n | reduce range($n) as $idx ({}; .[$v[$idx]]=$v[$idx+$n])'
-}
-
-declare -A info_array
+declare -A info
 
 while IFS= read -r line; do
     key="${line%%:*}"
@@ -16,9 +10,19 @@ while IFS= read -r line; do
         value="null"
     fi
 
-    info_array["$key"]="$value"
+    info["$key"]="$value"
 done <<< $(mocp -i)
+
+for key in "${!info[@]}"; do
+    echo "Key: $key, Value: ${info[$key]}"
+done
+
 
 echo "Content-type: application/json"
 echo ""
-tojson info_array
+for i in "${!info[@]}"
+do
+    echo "$i"
+    echo "${info[$i]}"
+done |
+jq -n -R 'reduce inputs as $i ({}; . + { ($i): (input|(tonumber? // .)) })'
