@@ -98,5 +98,5 @@ Set QUERY_STRING when call a script that accept params like this:
 
 ```
 cd /var/www
-QUERY_STRING='action=next' /var/www/control.sh
+QUERY_STRING='action=poweroff' bash control.sh
 ```
