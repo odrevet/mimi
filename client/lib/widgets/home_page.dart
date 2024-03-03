@@ -1,4 +1,5 @@
 import 'package:client/services/api_calls.dart';
+import 'package:client/widgets/info_display.dart';
 import 'package:client/widgets/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +35,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Info _info = Info();
+  var _info = Info();
   TextEditingController _filterController = TextEditingController();
+
+  @override
+  void initState() {
+    _refreshInfo();
+    super.initState();
+  }
 
   void _refreshInfo() async {
     var info = await fetchInfo();
@@ -59,56 +66,41 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Info:',
-            ),
-            Text(
-              '${_info.title}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              '${_info.author}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              '${_info.file}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              '${_info.state}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      TextField(
-                        controller: _filterController,
-                        decoration: InputDecoration(
-                          labelText: 'Enter some text',
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              InfoDisplay(info: _info),
+              Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TextField(
+                          controller: _filterController,
+                          decoration: InputDecoration(
+                            labelText: 'Music filter',
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          String inputText = _filterController.text;
-                          play(inputText);
-                        },
-                        child: Text('Play'),
-                      ),
-                    ])),
-            ControlBar()
-          ],
+                        ElevatedButton(
+                          onPressed: () {
+                            String inputText = _filterController.text;
+                            play(inputText);
+                          },
+                          child: Text('Play'),
+                        ),
+                      ])),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: BottomAppBar(child: ControlBar()),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: _refreshInfo,
-        tooltip: 'Refresh Info',
+        tooltip: 'Refresh',
         child: const Icon(Icons.refresh),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

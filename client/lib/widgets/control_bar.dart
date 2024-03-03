@@ -12,7 +12,7 @@ class ControlBar extends StatefulWidget {
 class _ControlBarState extends State<ControlBar> {
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       IconButton(
           onPressed: () => control('previous'),
           icon: Icon(Icons.skip_previous)),
@@ -25,7 +25,8 @@ class _ControlBarState extends State<ControlBar> {
       IconButton(
           onPressed: () => control('forward'), icon: Icon(Icons.fast_forward)),
       IconButton(
-          onPressed: () => control('poweroff'), icon: Icon(Icons.power_settings_new)),
+          onPressed: () => control('poweroff'),
+          icon: Icon(Icons.power_settings_new)),
     ]);
   }
 }
