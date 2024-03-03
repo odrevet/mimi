@@ -85,9 +85,18 @@ Set driver and prevent stutter
 Allow the system to be shutdown and run the webserver without a password
 
 
-# Listen music using fuzzy-playlist.sh
+# Listen music using playlist.sh
 
 First generate music_list.txt using `bash refresh_musics.list.sh` then: 
 
 * using `bash readkeys.sh` press `f` or `F1`
-* or using directly `bash fuzzy-playlist.sh FILTER`
+* or using directly `bash playlist.sh FILTER`
+
+# test API 
+
+Set QUERY_STRING when call a script that accept params like this: 
+
+```
+cd /var/www
+QUERY_STRING='action=next' /var/www/control.sh
+```
