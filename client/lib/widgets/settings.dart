@@ -26,7 +26,7 @@ class _SettingsState extends State<Settings> {
 
   _saveSettings() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('address', _addressController.text);
+    prefs.setString('address', _addressController.text.trim());
     prefs.setInt('port', int.parse(_portController.text));
   }
 
