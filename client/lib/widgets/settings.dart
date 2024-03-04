@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web/web.dart' as web;
 
 class Settings extends StatefulWidget {
   @override
@@ -16,11 +18,32 @@ class _SettingsState extends State<Settings> {
     _loadSettings();
   }
 
+  int _getDefaultPort() {
+    if (kIsWeb) {
+      return int.parse(web.window.location.port);
+    } else {
+      return 80;
+    }
+  }
+
+  String _getDefaultAddress() {
+    if (kIsWeb) {
+      String url = web.window.location.href;
+      return Uri.parse(url).host;
+    } else {
+      return 'localhost';
+    }
+  }
+
   _loadSettings() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    int? port = prefs.getInt('port');
+    String? address = prefs.getString('address');
+
     setState(() {
-      _addressController.text = prefs.getString('address') ?? '';
-      _portController.text = prefs.getInt('port').toString() ?? '';
+      _addressController.text = address ?? _getDefaultAddress();
+      _portController.text =
+          port == null ? _getDefaultPort().toString() : port.toString();
     });
   }
 
