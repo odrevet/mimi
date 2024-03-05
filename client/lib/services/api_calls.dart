@@ -7,7 +7,7 @@ import '../models/info.dart';
 
 Future<String> _getServerAddress() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  return "http://${prefs.getString('address')}:${prefs.getInt('port')}";
+  return "http://${prefs.getString('address')}:${prefs.getInt('port')}/api";
 }
 
 Future<Info> fetchInfo() async {
