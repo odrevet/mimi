@@ -24,9 +24,6 @@ class _ControlBarState extends State<ControlBar> {
           onPressed: () => control('backward'), icon: Icon(Icons.fast_rewind)),
       IconButton(
           onPressed: () => control('forward'), icon: Icon(Icons.fast_forward)),
-      IconButton(
-          onPressed: () => control('poweroff'),
-          icon: Icon(Icons.power_settings_new)),
     ]);
   }
 }

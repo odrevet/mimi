@@ -33,13 +33,13 @@ Future<bool> control(String action) async {
   }
 }
 
-Future<bool> play(String filter) async {
+Future<List<String>> play(String filter) async {
   final serverAddress = await _getServerAddress();
-  final response =
-  await http.get(Uri.parse("$serverAddress/play.sh?filter=${Uri.encodeComponent(filter)}"));
+  final response = await http.get(Uri.parse(
+      "$serverAddress/play.sh?filter=${Uri.encodeComponent(filter)}"));
 
   if (response.statusCode == 200) {
-    return true;
+    return response.body.split('\n');
   } else {
     throw Exception('Failed to play');
   }

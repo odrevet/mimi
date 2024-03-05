@@ -85,9 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             String inputText = _filterController.text;
-                            play(inputText);
+                            List<String> playlist = await play(inputText);
+                            print(playlist);
+
                           },
                           child: Text('Play'),
                         ),
