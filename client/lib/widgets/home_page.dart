@@ -100,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             setState(() {
                               this._playlist = playlist;
                             });
+                            _refreshInfo();
                           },
                           child: Text('Play'),
                         ),
