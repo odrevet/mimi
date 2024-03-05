@@ -33,10 +33,12 @@ Future<bool> control(String action) async {
   }
 }
 
-Future<List<String>> play(String filter) async {
+Future<List<String>> play(String filter, bool shuffle) async {
   final serverAddress = await _getServerAddress();
-  final response = await http.get(Uri.parse(
-      "$serverAddress/play.sh?filter=${Uri.encodeComponent(filter)}"));
+  String shuffleParam = shuffle ? '&shuffle=true' : '';
+  String uri = "$serverAddress/play.sh?filter=${Uri.encodeComponent(filter)}${shuffleParam}";
+  print(uri);
+  final response = await http.get(Uri.parse(uri));
 
   if (response.statusCode == 200) {
     List<dynamic> jsonArray = jsonDecode(response.body);

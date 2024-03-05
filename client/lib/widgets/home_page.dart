@@ -95,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            String inputText = _filterController.text;
-                            List<String> playlist = await play(inputText);
+                            String filter = _filterController.text;
+                            List<String> playlist = await play(filter, shuffle);
                             setState(() {
                               this._playlist = playlist;
                             });

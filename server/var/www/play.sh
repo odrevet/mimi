@@ -1,6 +1,9 @@
 source decode-params.sh
-filter=${params["filter"]}
-[[ " ${params[@]} " =~ " shuffle " ]] && shuffle="--shuffle" || shuffle=""
+
+shuffle=""
+if [[ -v params["shuffle"] ]]; then
+    shuffle="--shuffle"
+fi
 
 bash /home/player/playlist.sh --filter ${params["filter"]} --truncat 32 $shuffle
 
