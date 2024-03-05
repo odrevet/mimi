@@ -1,3 +1,5 @@
+import 'package:web/web.dart' as web;
+
 int getDefaultPort() {
   return int.parse(web.window.location.port);
 }
