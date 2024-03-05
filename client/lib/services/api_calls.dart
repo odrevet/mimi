@@ -39,7 +39,8 @@ Future<List<String>> play(String filter) async {
       "$serverAddress/play.sh?filter=${Uri.encodeComponent(filter)}"));
 
   if (response.statusCode == 200) {
-    return response.body.split('\n');
+    List<dynamic> jsonArray = jsonDecode(response.body);
+    return jsonArray.map((item) => item.toString()).toList();
   } else {
     throw Exception('Failed to play');
   }

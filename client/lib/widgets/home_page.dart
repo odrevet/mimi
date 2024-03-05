@@ -1,6 +1,8 @@
 import 'package:client/services/api_calls.dart';
 import 'package:client/widgets/info_display.dart';
+import 'package:client/widgets/playlist.dart';
 import 'package:client/widgets/settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/info.dart';
@@ -36,6 +38,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _info = Info();
+  var _playlist = <String>[];
+  bool shuffle = false;
   TextEditingController _filterController = TextEditingController();
 
   @override
@@ -59,6 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _refreshInfo,
+          ),
+          IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
               Navigator.pushNamed(context, '/settings');
@@ -73,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               InfoDisplay(info: _info),
+              Expanded(child: Playlist(entries: this._playlist)),
               Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Column(
@@ -88,23 +97,28 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: () async {
                             String inputText = _filterController.text;
                             List<String> playlist = await play(inputText);
-                            print(playlist);
-
+                            setState(() {
+                              this._playlist = playlist;
+                            });
                           },
                           child: Text('Play'),
                         ),
+                        CheckboxListTile(
+                          title: Text('Shuffle'),
+                          value: shuffle,
+                          onChanged: (newValue) {
+                            setState(() {
+                              shuffle = newValue!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.trailing,
+                        )
                       ])),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(child: ControlBar()),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _refreshInfo,
-        tooltip: 'Refresh',
-        child: const Icon(Icons.refresh),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
