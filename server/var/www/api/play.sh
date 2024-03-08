@@ -5,7 +5,7 @@ if [[ -v params["shuffle"] ]]; then
     shuffle="--shuffle"
 fi
 
-bash /home/player/playlist.sh --filter ${params["filter"]} --truncat 32 $shuffle
+bash /home/player/playlist.sh --filter "${params['filter']}" --truncat 32 $shuffle
 
 # Read playlist
 entries=()
