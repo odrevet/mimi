@@ -28,7 +28,7 @@ done
 
 
 if [ "$interactive" = true ]; then
-    musics=$(fzf -e < /home/player/musics_list.txt)
+    musics=$(fzf -e --multi --bind=ctrl-a:select-all < /home/player/musics_list.txt)
 else
     musics=$(fzf -e --filter "$filter" < /home/player/musics_list.txt)
 fi
