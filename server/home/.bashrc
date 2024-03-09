@@ -16,7 +16,7 @@ if [ -z "$SSH_CLIENT" ]; then
     # Commands to run only for non-SSH session
 
     # set volume
-    amixer set 'Headphone' 100%
+    amixer set PCM "100%"
 
     # start music on console server
     mocp -S
